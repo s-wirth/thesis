@@ -27,6 +27,7 @@ SECRET_KEY = 'p8b69ity)4bes#(ifb8bpexmq4*yavcjtg=h$n-ap0e$7rcs$l'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    '127.0.0.1',
     'sophie-wirth-thesis.herokuapp.com',
 ]
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -77,7 +79,7 @@ WSGI_APPLICATION = 'thesis.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
-if os.environ['DATABASE_URL']:
+if os.getenv('DATABASE_URL'):
     db_from_env = dj_database_url.config()
 
     DATABASES = {
@@ -93,6 +95,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'thesis',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
         }
     }
 
