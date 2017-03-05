@@ -25,7 +25,9 @@ SECRET_KEY = 'p8b69ity)4bes#(ifb8bpexmq4*yavcjtg=h$n-ap0e$7rcs$l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'sophie-wirth-thesis.herokuapp.com',
+]
 
 
 # Application definition
