@@ -27,7 +27,7 @@ SECRET_KEY = 'p8b69ity)4bes#(ifb8bpexmq4*yavcjtg=h$n-ap0e$7rcs$l'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1',
+    'localhost', '127.0.0.1',
     'sophie-wirth-thesis.herokuapp.com',
 ]
 
