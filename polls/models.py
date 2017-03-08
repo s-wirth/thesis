@@ -1,8 +1,12 @@
 from django.db import models
 
 
-class Poll(models.Model):
-    question = models.CharField(max_length=200)
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
 
-    def __string__(self):
-        return "lol"
+
+class Option(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    option_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
