@@ -1,1 +1,1 @@
-web: gunicorn thesis.wsgi --log-file -
+web: gunicorn thesis.wsgi --log-file -; python thesis/manage.py collectstatic --noinput
