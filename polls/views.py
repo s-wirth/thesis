@@ -21,19 +21,18 @@ def index(request):
 
 def new_poll(request):
     if request.method == 'POST':
-        question_data = QuestionForm(request.POST)
-        question_text = question_data['question_text'].value()
-        if question_data['pub_date'] is not None:
-            pub_date = question_data['pub_date'].value()
-        else:
-            pub_date = now()
+        question_text = request.POST['question']
+        pub_date = now()
         new_question = Question(question_text=question_text, pub_date=pub_date)
         new_question.save()
 
-        option_date = OptionForm(request.POST)
-        option_text = option_date['option_text'].value()
-        new_option = Option(option_text=option_text, question=new_question)
-        new_option.save()
+        options_list = request.POST.getlist('options')
+        # import pdb
+        # pdb.set_trace()
+        for option in options_list:
+            option_text = option
+            new_option = Option(option_text=option_text, question=new_question)
+            new_option.save()
 
         return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id,)))
     else:

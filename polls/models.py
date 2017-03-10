@@ -10,7 +10,7 @@ class Question(models.Model):
 
 
 class Option(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=False)
     option_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)
 
