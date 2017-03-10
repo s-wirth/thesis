@@ -4,7 +4,9 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
+from django.utils.timezone import now
 
+from .forms import QuestionForm
 from polls.models import Question, Option
 
 
@@ -18,7 +20,25 @@ def index(request):
 
 
 def new_poll(request):
-    return HttpResponseRedirect(reverse('polls:index'))
+    if request.method == 'POST':
+        new_question = QuestionForm(request.POST)
+        question_text = new_question['question_text'].value()
+        if new_question['pub_date'] is not None:
+            pub_date = new_question['pub_date'].value()
+        else:
+            pub_date = now()
+        new_question = Question(question_text=question_text, pub_date=pub_date)
+        new_question.save()
+
+        template = loader.get_template('polls/detail.html')
+        context = {
+            'question': new_question,
+        }
+        return HttpResponse(template.render(context, request))
+    else:
+        template = loader.get_template('polls/new_poll.html')
+        context = {'form': QuestionForm()}
+        return HttpResponse(template.render(context, request))
 
 
 def detail(request, question_id):

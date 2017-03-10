@@ -2,31 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Detail for {{ question }}</title>
+    <title>New Poll</title>
 </head>
 <body>
 <div>
    <h1>New Poll</h1>
 
-    <form action="{% url 'polls:index' %}" method="post">
+    <form method="post">
         {% csrf_token %}
-        <p>
-            <input type="text" name="question_text" id="question_text"/>
-            <label for="question_text">{{ option.option_text }}</label>
-        </p>
-        <p>
-            <input type="text" name="option_text" id="option1"/>
-            <label for="option1">Option 1</label>
-        </p>
-        <p>
-            <input type="text" name="option_text" id="option2"/>
-            <label for="option2">Option 2</label>
-        </p>
-        <p>
-            <input type="text" name="option_text" id="option3"/>
-            <label for="option3">Option 3</label>
-        </p>
-        <p><input type="submit" value="New_Poll" /></p>
+        {{ form }}
+{#        <p>#}
+{#            <input type="text" name="option_text" id="option1"/>#}
+{#            <label for="option1">Option 1</label>#}
+{#        </p>#}
+{#        <p>#}
+{#            <input type="text" name="option_text" id="option2"/>#}
+{#            <label for="option2">Option 2</label>#}
+{#        </p>#}
+{#        <p>#}
+{#            <input type="text" name="option_text" id="option3"/>#}
+{#            <label for="option3">Option 3</label>#}
+{#        </p>#}
+        <p><input type="submit" value="POST" /></p>
     </form>
 </div>
 
