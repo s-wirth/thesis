@@ -50,9 +50,12 @@ def detail(request, question_id):
     except:
         raise Http404("Question does not exist")
 
+    options = question.option_set.all().order_by('pk')
+
     template = loader.get_template('polls/detail.html')
     context = {
         'question': question,
+        'options': options,
     }
     return HttpResponse(template.render(context, request))
 
