@@ -11,19 +11,7 @@
     <form method="post">
         {% csrf_token %}
         {{ question_form }}
-        {{ option_form }}
-{#        <p>#}
-{#            <input type="text" name="option_text" id="option1"/>#}
-{#            <label for="option1">Option 1</label>#}
-{#        </p>#}
-{#        <p>#}
-{#            <input type="text" name="option_text" id="option2"/>#}
-{#            <label for="option2">Option 2</label>#}
-{#        </p>#}
-{#        <p>#}
-{#            <input type="text" name="option_text" id="option3"/>#}
-{#            <label for="option3">Option 3</label>#}
-{#        </p>#}
+        <p>{{ option_form }}</p>
         <p><input type="submit" value="POST" /></p>
     </form>
 </div>
