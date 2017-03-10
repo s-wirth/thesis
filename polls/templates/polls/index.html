@@ -1,10 +1,15 @@
 {% extends 'polls/base.html' %}
 {% block content %}
-    <div>
-    {% for question in question_list %}
-        <p><a href="{{ question.pk }}">{{ question }}</a></p>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>All Polls:</h1>
+            <div>
+                {% for question in question_list %}
+                    <p><a href="{{ question.pk }}">{{ question }}</a></p>
 
-    {% endfor %}
-        <a href="new_poll" class="btn btn-primary">new poll</a>
+                {% endfor %}
+                <a href="new_poll" class="btn btn-primary">new poll</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
