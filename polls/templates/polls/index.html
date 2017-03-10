@@ -1,3 +1,8 @@
-{% for question in question_list %}
-    <p>{{ question }}</p>
-{% endfor %}
+{% extends 'polls/base.html' %}
+{% block content %}
+    <div>
+    {% for question in question_list %}
+        <p>{{ question }}</p>
+    {% endfor %}
+    </div>
+{% endblock %}
