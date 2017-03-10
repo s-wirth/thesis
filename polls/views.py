@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.utils.timezone import now
 
-from .forms import QuestionForm
+from .forms import QuestionForm, OptionForm
 from polls.models import Question, Option
 
 
@@ -21,23 +21,27 @@ def index(request):
 
 def new_poll(request):
     if request.method == 'POST':
-        new_question = QuestionForm(request.POST)
-        question_text = new_question['question_text'].value()
-        if new_question['pub_date'] is not None:
-            pub_date = new_question['pub_date'].value()
+        question_data = QuestionForm(request.POST)
+        question_text = question_data['question_text'].value()
+        if question_data['pub_date'] is not None:
+            pub_date = question_data['pub_date'].value()
         else:
             pub_date = now()
         new_question = Question(question_text=question_text, pub_date=pub_date)
         new_question.save()
 
-        template = loader.get_template('polls/detail.html')
-        context = {
-            'question': new_question,
-        }
-        return HttpResponse(template.render(context, request))
+        option_date = OptionForm(request.POST)
+        option_text = option_date['option_text'].value()
+        new_option = Option(option_text=option_text, question=new_question)
+        new_option.save()
+
+        return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id,)))
     else:
         template = loader.get_template('polls/new_poll.html')
-        context = {'form': QuestionForm()}
+        context = {
+            'question_form': QuestionForm(),
+            'option_form': OptionForm()
+        }
         return HttpResponse(template.render(context, request))
 
 
@@ -72,7 +76,4 @@ def vote(request, question_id):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))

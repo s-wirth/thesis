@@ -10,7 +10,8 @@
 
     <form method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ question_form }}
+        {{ option_form }}
 {#        <p>#}
 {#            <input type="text" name="option_text" id="option1"/>#}
 {#            <label for="option1">Option 1</label>#}
