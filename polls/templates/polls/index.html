@@ -2,7 +2,8 @@
 {% block content %}
     <div>
     {% for question in question_list %}
-        <p>{{ question }}</p>
+        <p><a href="{{ question.pk }}">{{ question }}</a></p>
+
     {% endfor %}
     </div>
 {% endblock %}
