@@ -9,6 +9,7 @@ from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.views import View
 
+from pollgroups.models import CourseSession
 from polls.models import Question, Option
 
 
@@ -27,7 +28,8 @@ class CreatePollView(View):
     @method_decorator(login_required)
     def post(self, request):
         question_text = request.POST['question']
-        new_question = Question(question_text=question_text, pub_date=now())
+        session = request.POST['session']
+        new_question = Question(question_text=question_text, pub_date=now(), session=session)
         new_question.save()
 
         options_list = request.POST.getlist('options')
@@ -39,7 +41,8 @@ class CreatePollView(View):
         return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id,)))
 
     def get(self, request):
-        return render(request, self.template)
+        context = {'sessions': CourseSession.objects.all()}
+        return render(request, self.template, context=context)
 
 
 def detail(request, question_id):

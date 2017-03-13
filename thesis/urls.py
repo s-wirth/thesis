@@ -6,6 +6,7 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('homepage.urls')),
+    url(r'^pollgroups/', include('pollgroups.urls')),
     url(r'^polls/', include('polls.urls')),
 ]
 

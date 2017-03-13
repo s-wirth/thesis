@@ -7,7 +7,8 @@
                 <input class="form-control option" type="text" name="options"/>
             </div>
             <div class="col-xs-4">
-                <button type="button" class="btn btn-default removeButton"><span class="glyphicon glyphicon-minus"></span></button>
+                <button type="button" class="btn btn-default removeButton"><span
+                        class="glyphicon glyphicon-minus"></span></button>
             </div>
         </div>
     </script>
@@ -17,30 +18,50 @@
             <h1>New Poll</h1>
             <form id="pollForm" method="post" class="form-horizontal">
                 {% csrf_token %}
+
                 <div class="form-group">
-                    <label class="col-xs-3 control-label">Question</label>
+                    <label class="col-xs-3 control-label" for="session">Session</label>
                     <div class="col-xs-5">
-                        <input type="text" class="form-control" name="question"/>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Session
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                {% for session in sessions %}
+                                    <li><a href="#">{{ session }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
 
-                <div class="options">
                     <div class="form-group">
-                        <label class="col-xs-3 control-label" for="option1">Options</label>
+                        <label class="col-xs-3 control-label" for="question">Question</label>
                         <div class="col-xs-5">
-                            <input type="text" class="form-control option" id="option1" name="options"/>
-                        </div>
-                        <div class="col-xs-4">
-                            <button type="button" class="btn btn-default addButton"><span class="glyphicon glyphicon-plus"></span></button>
+                            <input type="text" class="form-control" name="question" id="question"/>
                         </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-xs-5 col-xs-offset-3">
-                        <button type="submit" class="btn btn-default">New Poll</button>
+                    <div class="options">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="option1">Options</label>
+                            <div class="col-xs-5">
+                                <input type="text" class="form-control option" id="option1" name="options"/>
+                            </div>
+                            <div class="col-xs-4">
+                                <button type="button" class="btn btn-default addButton"><span
+                                        class="glyphicon glyphicon-plus"></span></button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-5 col-xs-offset-3">
+                            <button type="submit" class="btn btn-default">New Poll</button>
+                        </div>
+                    </div>
             </form>
 
 

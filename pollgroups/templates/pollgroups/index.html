@@ -1,0 +1,14 @@
+{% extends 'homepage/base.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>All Sessions:</h1>
+            <div>
+                {% for session in sessions %}
+                    <p><a href="{{ session.pk }}">{{ session }}</a></p>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
