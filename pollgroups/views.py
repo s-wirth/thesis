@@ -12,13 +12,14 @@ from django.views.generic import DetailView
 from pollgroups.models import CourseSession
 
 
-def index(request):
-    sessions = CourseSession.objects.all()
-    template = loader.get_template('pollgroups/index.html')
-    context = {
-        'sessions': sessions,
-    }
-    return HttpResponse(template.render(context, request))
+class IndexView(View):
+    def get(self, request):
+        sessions = CourseSession.objects.all()
+        template = loader.get_template('pollgroups/index.html')
+        context = {
+            'sessions': sessions,
+        }
+        return HttpResponse(template.render(context, request))
 
 
 class CreateSessionView(View):

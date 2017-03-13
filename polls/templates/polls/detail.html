@@ -6,7 +6,7 @@
 
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-            <form action="{% url 'polls:vote' question.id %}" method="post">
+            <form action="." method="post">
                 {% csrf_token %}
                 {% for option in options %}
                     <p>
