@@ -6,7 +6,6 @@
             <div>
                 {% for question in question_list %}
                     <p><a href="{{ question.pk }}">{{ question }}</a></p>
-
                 {% endfor %}
                 <a href="{% url 'polls:create_poll' %}" class="btn btn-primary">New Poll</a>
             </div>

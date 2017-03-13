@@ -28,7 +28,7 @@ class CreatePollView(View):
     @method_decorator(login_required)
     def post(self, request):
         question_text = request.POST['question']
-        session = request.POST['session']
+        session = CourseSession.objects.get(pk= request.POST['session'])
         new_question = Question(question_text=question_text, pub_date=now(), session=session)
         new_question.save()
 
@@ -71,7 +71,6 @@ def vote(request, question_id):
     try:
         selected_choice = question.option_set.get(pk=request.POST['option'])
     except (KeyError, Option.DoesNotExist):
-        # Redisplay the question voting form.
         return render(request, 'polls/detail.html', {
             'question': question,
             'error_message': "You didn't select an option.",

@@ -6,8 +6,8 @@
             <div>
                 {% for session in sessions %}
                     <p><a href="{{ session.pk }}">{{ session }}</a></p>
-
                 {% endfor %}
+                <a href="{% url 'pollgroups:create_session' %}" class="btn btn-primary">New Session</a>
             </div>
         </div>
     </div>

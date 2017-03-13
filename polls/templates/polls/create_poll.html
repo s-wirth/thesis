@@ -23,16 +23,11 @@
                     <label class="col-xs-3 control-label" for="session">Session</label>
                     <div class="col-xs-5">
                         <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Session
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <select name="session" id="session" class="btn btn-default">
                                 {% for session in sessions %}
-                                    <li><a href="#">{{ session }}</a></li>
+                                    <option value="{{ session.id }}">{{ session }}</option>
                                 {% endfor %}
-                            </ul>
+                            </select>
                         </div>
                     </div>
                 </div>
