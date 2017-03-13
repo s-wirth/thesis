@@ -1,20 +1,23 @@
-{% load i18n %}
+{% load staticfiles i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
-    <title>{% block title %}User test{% endblock %}</title>
-</head>
+    <meta charset="UTF-8">
+    <title>Thesis</title>
 
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src={% static 'global_js/jquery-3.1.1.min.js' %}></script>
+    <script type="text/javascript" src={% static 'js/dynamic_field.js' %}></script>
+</head>
 <body>
     <div id="header">
     {% block header %}
     <a href="{% url 'homepage:homepage' %}">{% trans "Home" %}</a> |
 
     {% if user.is_authenticated %}
-        {% trans "Logged in" %}: {{ user.username }} 
-        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> | 
+        {% trans "Logged in" %}: {{ user.username }}
+        (<a href="{% url 'auth_logout' %}">{% trans "Log out" %}</a> |
         <a href="{% url 'auth_password_change' %}">{% trans "Change password" %}</a>)
     {% else %}
        <a href="{% url 'auth_login' %}">{% trans "Log in" %}</a>
@@ -33,5 +36,4 @@
     {% endblock %}
     </div>
 </body>
-
 </html>

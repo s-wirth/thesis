@@ -28,6 +28,8 @@ DEBUG = True
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
+LOGIN_REDIRECT_URL = '/'
+
 ALLOWED_HOSTS = [
     'localhost', '127.0.0.1',
     'sophie-wirth-thesis.herokuapp.com',
