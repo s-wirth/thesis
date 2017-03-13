@@ -8,7 +8,7 @@
                     <p><a href="{{ question.pk }}">{{ question }}</a></p>
 
                 {% endfor %}
-                <a href="new_poll" class="btn btn-primary">New Poll</a>
+                <a href="{% url 'polls:create_poll' %}" class="btn btn-primary">New Poll</a>
             </div>
         </div>
     </div>

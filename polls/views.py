@@ -1,13 +1,14 @@
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
-from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
 from django.utils.timezone import now
+from django.views import View
 
-from .forms import QuestionForm, OptionForm
 from polls.models import Question, Option
 
 
@@ -20,28 +21,25 @@ def index(request):
     return HttpResponse(template.render(context, request))
 
 
-def new_poll(request):
-    if request.method == 'POST':
+class CreatePollView(View):
+    template = "polls/create_poll.html"
+
+    @method_decorator(login_required)
+    def post(self, request):
         question_text = request.POST['question']
-        pub_date = now()
-        new_question = Question(question_text=question_text, pub_date=pub_date)
+        new_question = Question(question_text=question_text, pub_date=now())
         new_question.save()
 
         options_list = request.POST.getlist('options')
-        # import pdb
-        # pdb.set_trace()
         for option in options_list:
             option_text = option
             new_option = Option(option_text=option_text, question=new_question)
             new_option.save()
 
         return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id,)))
-    else:
-        template = loader.get_template('polls/new_poll.html')
-        context = {
-            'user': request.user
-        }
-        return HttpResponse(template.render(context, request))
+
+    def get(self, request):
+        return render(request, self.template)
 
 
 def detail(request, question_id):

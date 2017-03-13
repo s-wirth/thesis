@@ -1,5 +1,6 @@
 from django.conf.urls import url
 
+from polls.views import CreatePollView
 from . import views
 
 app_name = 'polls'
@@ -11,5 +12,5 @@ urlpatterns = [
     url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
     # ex: /polls/5/vote/
     url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
-    url(r'^new_poll/$', views.new_poll, name='new_poll'),
+    url(r'^create_poll/$', CreatePollView.as_view(), name='create_poll'),
 ]
