@@ -2,9 +2,15 @@ appdirs==1.4.2
 dj-database-url==0.4.2
 dj-static==0.0.6
 Django==1.10.6
+django-registration==2.2
 gunicorn==19.7.0
+npm==0.1.1
+optional-django==0.1.0
 packaging==16.8
+pdb==0.1
 psycopg2==2.7
 pyparsing==2.1.10
+python-gnupg==0.4.0
+PyYAML==3.12
 six==1.10.0
 static3==0.7.0

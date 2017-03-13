@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
+from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 from .forms import QuestionForm, OptionForm
@@ -38,8 +39,7 @@ def new_poll(request):
     else:
         template = loader.get_template('polls/new_poll.html')
         context = {
-            'question_form': QuestionForm(),
-            'option_form': OptionForm()
+            'user': request.user
         }
         return HttpResponse(template.render(context, request))
 
