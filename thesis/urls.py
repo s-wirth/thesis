@@ -19,6 +19,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('homepage.urls')),
     url(r'^polls/', include('polls.urls')),
 ]
 
