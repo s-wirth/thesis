@@ -15,21 +15,16 @@ from polls.models import Question, Option
 
 class IndexView(View):
     def get(self, request):
-        template = loader.get_template('polls/index.html')
-        questions = Question.objects.all()
-        context = {
-            'question_list': questions,
-        }
-        return HttpResponse(template.render(context, request))
+        return HttpResponseRedirect(reverse('pollgroups:index'))
 
 
 class CreatePollView(View):
     template = "polls/create_poll.html"
 
     @method_decorator(login_required)
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
         question_text = request.POST['question']
-        session = CourseSession.objects.get(pk= request.POST['session'])
+        session = CourseSession.objects.get(pk=self.kwargs['session_id'])
         new_question = Question(question_text=question_text, pub_date=now(), session=session)
         new_question.save()
 
@@ -39,10 +34,10 @@ class CreatePollView(View):
             new_option = Option(option_text=option_text, question=new_question)
             new_option.save()
 
-        return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id,)))
+        return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id, session.id)))
 
-    def get(self, request):
-        context = {'sessions': CourseSession.objects.all()}
+    def get(self, request, *args, **kwargs):
+        context = {'session': CourseSession.objects.get(pk=self.kwargs['session_id'])}
         return render(request, self.template, context=context)
 
 

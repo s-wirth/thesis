@@ -4,9 +4,9 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>{{ session }}</h1>
             {% for question in questions %}
-                <li><a href="polls/{{ question.pk }}">{{ question }}</a></li>
+                <li><a href="../../polls/{{ question.pk }}/{{ session.id }}">{{ question }}</a></li>
             {% endfor %}
-
+            <a href="{% url 'polls:create_poll' session_id=session.id %}" class="btn btn-primary">New Poll</a>
         </div>
     </div>
 {% endblock %}

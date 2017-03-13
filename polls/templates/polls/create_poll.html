@@ -20,14 +20,11 @@
                 {% csrf_token %}
 
                 <div class="form-group">
-                    <label class="col-xs-3 control-label" for="session">Session</label>
+                    <label class="col-xs-3 control-label" for="session">Session:</label>
+                    <p>{{ session }}</p>
                     <div class="col-xs-5">
                         <div class="dropdown">
-                            <select name="session" id="session" class="btn btn-default">
-                                {% for session in sessions %}
-                                    <option value="{{ session.id }}">{{ session }}</option>
-                                {% endfor %}
-                            </select>
+                            <input type="hidden" name="session" value="{{ session.id }}">
                         </div>
                     </div>
                 </div>
