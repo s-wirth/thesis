@@ -7,7 +7,9 @@
                 {% for session in sessions %}
                     <p><a href="{{ session.pk }}">{{ session }}</a></p>
                 {% endfor %}
-                <a href="{% url 'coursesessions:create_session' %}" class="btn btn-primary">New Session</a>
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'coursesessions:create_session' %}" class="btn btn-primary">New Session</a>
+                {% endif %}
             </div>
         </div>
     </div>
