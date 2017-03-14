@@ -14,6 +14,13 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="col-xs-3 control-label" for="session">Creator:</label>
+                        <p>{{ request.user }}</p>
+                        <div class="col-xs-5">
+                            <input type="hidden" name="session" value="{{ request.user.id }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-xs-5 col-xs-offset-3">
                             <button type="submit" class="btn btn-default">New Session</button>
                         </div>

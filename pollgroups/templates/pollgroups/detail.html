@@ -1,12 +1,23 @@
 {% extends 'homepage/base.html' %}
+{% load guardian_tags %}
 {% block content %}
+    {% get_obj_perms request.user for session as "session_perms" %}
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <h1>{{ session }}</h1>
+            <h1>Session Name: {{ session }}</h1>
+            <h2>Admin: {{ session.admins.all.0 }}</h2>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% if questions %}
+            <h3>Polls:</h3>
             {% for question in questions %}
                 <li><a href="../../polls/{{ question.pk }}/{{ session.id }}">{{ question }}</a></li>
             {% endfor %}
+        {% else %}
+            <h3>No Polls in this Session yet</h3>
+        {% endif %}
+        {% if "make_poll" in session_perms %}
             <a href="{% url 'polls:create_poll' session_id=session.id %}" class="btn btn-primary">New Poll</a>
+        {% endif %}
         </div>
     </div>
 {% endblock %}

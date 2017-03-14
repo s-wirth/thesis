@@ -8,6 +8,7 @@ from django.utils.decorators import method_decorator
 from django.utils.timezone import now
 from django.views import View
 from django.views.generic import DetailView
+from guardian.shortcuts import get_perms
 
 from pollgroups.models import CourseSession
 from polls.models import Question, Option
@@ -23,18 +24,24 @@ class CreatePollView(View):
 
     @method_decorator(login_required)
     def post(self, request, *args, **kwargs):
-        question_text = request.POST['question']
         session = CourseSession.objects.get(pk=self.kwargs['session_id'])
-        new_question = Question(question_text=question_text, pub_date=now(), session=session)
-        new_question.save()
+        if "make_poll" in get_perms(request.user, session):
+            question_text = request.POST['question']
+            new_question = Question(question_text=question_text, pub_date=now(), session=session)
+            new_question.save()
 
-        options_list = request.POST.getlist('options')
-        for option in options_list:
-            option_text = option
-            new_option = Option(option_text=option_text, question=new_question)
-            new_option.save()
+            options_list = request.POST.getlist('options')
+            for option in options_list:
+                option_text = option
+                new_option = Option(option_text=option_text, question=new_question)
+                new_option.save()
 
-        return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id, session.id)))
+            return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id, session.id)))
+        else:
+            return render(request, 'pollgroups/detail.html', {
+                'session': session,
+                'error_message': "You are not an admin for this Session.",
+            })
 
     def get(self, request, *args, **kwargs):
         context = {'session': CourseSession.objects.get(pk=self.kwargs['session_id'])}

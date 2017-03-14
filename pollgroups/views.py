@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.contrib.auth.models import User
+from guardian.shortcuts import assign_perm
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -29,6 +30,10 @@ class CreateSessionView(View):
     def post(self, request):
         pg_name = request.POST['session_name']
         new_session = CourseSession(pg_name=pg_name)
+        new_session.save()
+        init_admin = User.objects.get(pk=request.user.id)
+        new_session.admins = [init_admin]
+        assign_perm('make_poll', init_admin, new_session)
         new_session.save()
 
         return HttpResponseRedirect(reverse('pollgroups:detail', args=(new_session.id,)))

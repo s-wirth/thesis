@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'guardian',
     'homepage',
     'pollgroups',
     'polls',
@@ -61,6 +62,11 @@ MIDDLEWARE_CLASSES = [
 ]
 
 ROOT_URLCONF = 'thesis.urls'
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)
 
 TEMPLATES = [
     {
