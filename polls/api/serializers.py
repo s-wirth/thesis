@@ -4,9 +4,13 @@ from polls.models import Question
 
 
 class QuestionSerializer(ModelSerializer):
+
     class Meta:
         model = Question
+        depth = 1
         fields = [
             'question_text',
+            'session',
             'pub_date',
+            'option_set',
         ]
