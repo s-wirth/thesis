@@ -1,9 +1,9 @@
 from rest_framework.generics import ListAPIView
 
-from polls.models import Question, Option
-from .serializers import QuestionSerializer
+from polls.models import Question
+from .serializers import PollSerializer
 
 
-class QuestionListAPIView(ListAPIView):
+class PollListAPIView(ListAPIView):
     queryset = Question.objects.all()
-    serializer_class = QuestionSerializer
+    serializer_class = PollSerializer

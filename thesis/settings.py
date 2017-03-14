@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'guardian',
     'homepage',
-    'pollgroups',
+    'coursesessions',
     'polls',
 ]
 

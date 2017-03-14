@@ -1,6 +1,6 @@
 from django.db import models
 
-from pollgroups.models import CourseSession
+from coursesessions.models import CourseSession
 
 
 class Question(models.Model):

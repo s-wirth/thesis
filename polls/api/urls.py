@@ -1,9 +1,7 @@
 from django.conf.urls import url
 
-from polls.api.views import QuestionListAPIView
-from polls.views import CreatePollView, IndexView, PollDetailView, ResultsView
-from . import views
+from polls.api.views import PollListAPIView
 
 urlpatterns = [
-    url(r'^$', QuestionListAPIView.as_view(), name='question-list'),
+    url(r'^$', PollListAPIView.as_view(), name='poll-list'),
 ]

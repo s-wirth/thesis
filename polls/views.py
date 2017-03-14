@@ -10,13 +10,13 @@ from django.views import View
 from django.views.generic import DetailView
 from guardian.shortcuts import get_perms
 
-from pollgroups.models import CourseSession
+from coursesessions.models import CourseSession
 from polls.models import Question, Option
 
 
 class IndexView(View):
     def get(self, request):
-        return HttpResponseRedirect(reverse('pollgroups:index'))
+        return HttpResponseRedirect(reverse('coursesessions:index'))
 
 
 class CreatePollView(View):
@@ -38,7 +38,7 @@ class CreatePollView(View):
 
             return HttpResponseRedirect(reverse('polls:detail', args=(new_question.id, session.id)))
         else:
-            return render(request, 'pollgroups/detail.html', {
+            return render(request, 'coursesessions/detail.html', {
                 'session': session,
                 'error_message': "You are not an admin for this Session.",
             })

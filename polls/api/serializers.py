@@ -3,7 +3,7 @@ from rest_framework.serializers import ModelSerializer
 from polls.models import Question
 
 
-class QuestionSerializer(ModelSerializer):
+class PollSerializer(ModelSerializer):
 
     class Meta:
         model = Question
