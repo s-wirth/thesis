@@ -10,7 +10,7 @@
                 {% endfor %}
             </ul>
 
-            <a href="{% url 'polls:index' %}" class="btn btn-default">Back to Home</a>
+            <a href="{% url 'pollgroups:detail' pk=question.session.id %}" class="btn btn-default">Back to Home</a>
         </div>
     </div>
 {% endblock %}
