@@ -1,1 +1,1 @@
-web: gunicorni thesis.wsgi --log-file -; python thesis/manage.py collectstatic --noinput; python thesis/manage.py migrate
+web: gunicorni thesis.wsgi --log-file -; python manage.py collectstatic --noinput; python manage.py migrate --no-input
