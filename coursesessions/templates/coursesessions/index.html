@@ -4,9 +4,11 @@
         <div class="col-md-6 col-md-offset-3">
             <h1>All Sessions:</h1>
             <div>
-                {% for session in sessions %}
-                    <p><a href="{{ session.pk }}">{{ session }}</a></p>
-                {% endfor %}
+                {% if sessions %}
+                    {% for session in sessions %}
+                        <p><a href="{{ session.pk }}">{{ session }}</a></p>
+                    {% endfor %}
+                {% endif %}
                 {% if request.user.is_authenticated %}
                     <a href="{% url 'coursesessions:create_session' %}" class="btn btn-primary">New Session</a>
                 {% endif %}
