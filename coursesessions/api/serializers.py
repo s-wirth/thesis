@@ -10,6 +10,5 @@ class SessionSerializer(ModelSerializer):
         depth = 1
         fields = [
             'session_name',
-            'admins',
             'question_set',
         ]
