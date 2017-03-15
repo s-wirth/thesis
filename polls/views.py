@@ -59,11 +59,13 @@ class PollDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
         question = Question.objects.get(pk=self.kwargs['pk'])
+        options = question.option_set.all().order_by('pk')
         try:
             selected_choice = question.option_set.get(pk=request.POST['option'])
         except (KeyError, Option.DoesNotExist):
             return render(request, 'polls/detail.html', {
                 'question': question,
+                'options': options,
                 'error_message': "You didn't select an option.",
             })
         else:
@@ -76,4 +78,11 @@ class PollDetailView(DetailView):
 
 class ResultsView(DetailView):
     template_name = "polls/results.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultsView, self).get_context_data(**kwargs)
+        question = Question.objects.get(pk=self.kwargs['pk'])
+        context['options'] = question.option_set.all().order_by('pk')
+        return context
+
     model = Question
