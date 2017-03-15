@@ -1,15 +1,16 @@
 {% extends "homepage/base.html" %}
-{% load i18n %}
+{% load i18n bootstrap3 %}
 
 {% block content %}
-<form method="post" action=".">
-  {% csrf_token %} 
-  {{ form.as_p }}
-
-  <input type="submit" value="Log in" />
-  <input type="hidden" name="next" value="{{ next }}" />
-</form>
-
-<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-<p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form method="post" action=".">
+                {% csrf_token %}
+                {% bootstrap_form form layout="horizontal" %}
+                {% buttons submit='Log in' layout='horizontal' %}{% endbuttons %}
+            </form>
+            <p style="margin-top: 16rem; margin-left: 12rem"><strong>{% trans "Forgot password" %}?</strong> <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+            <p style="margin-left: 12rem"><strong>{% trans "Not member" %}? </strong><a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+        </div>
+    </div>
 {% endblock %}
