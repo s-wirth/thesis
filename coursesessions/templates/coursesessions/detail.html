@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <h1>Session Name: {{ session }}</h1>
-            <p>Admin: {{ session.admins.all.0 }}</p>
+            <p><strong>Admin: {{ session.admins.all.0 }}</strong></p>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         {% if questions %}
             <h2>Polls:</h2>
